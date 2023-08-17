@@ -17,9 +17,8 @@ if submit:
     options.add_argument('--disable-dev-shm-usage')
 
     CHROMEDRIVER = ChromeDriverManager().install()  # ChromeTypeを指定しない
-    service = ChromeService(CHROMEDRIVER)
+    service = ChromeService(executable_path=CHROMEDRIVER)
     driver = webdriver.Chrome(
-        executable_path=CHROMEDRIVER,
         options=options,
         service=service
     )
