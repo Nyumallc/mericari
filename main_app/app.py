@@ -31,7 +31,7 @@ if submit:
 
     # URLで指定したwebページを開く
     driver.get(s_num)
-    time.sleep(1)
+    time.sleep(5)
     counthtml = driver.page_source.encode('utf-8')
     soup = BeautifulSoup(counthtml, "html.parser")
     print(soup)
