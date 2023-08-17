@@ -1,6 +1,5 @@
 import streamlit as st
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver import ChromeOptions
 from bs4 import BeautifulSoup
@@ -17,7 +16,10 @@ if submit:
     options.add_argument('--disable-dev-shm-usage')
 
     CHROMEDRIVER = ChromeDriverManager().install()  # ChromeTypeを指定しない
-    driver = webdriver.Chrome(service=Service)
+    driver = webdriver.Chrome(
+        executable_path=CHROMEDRIVER,
+        options=options
+    )
 
     # URLで指定したwebページを開く
     driver.get(s_num)
