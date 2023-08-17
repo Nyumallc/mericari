@@ -6,6 +6,9 @@ from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 import time
 
+# ユーザーエージェントを指定
+user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
+
 s_num = st.text_input('URL')
 submit = st.button("Search")
 if submit:
@@ -15,6 +18,9 @@ if submit:
     options.add_argument('--disable-gpu')
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
+    
+    # ユーザーエージェントを設定
+    options.add_argument(f"user-agent={user_agent}")
 
     CHROMEDRIVER = ChromeDriverManager().install()  # ChromeTypeを指定しない
     service = ChromeService(executable_path=CHROMEDRIVER)
