@@ -1,14 +1,15 @@
 import streamlit as st
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver import ChromeOptions
+from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 import time
 
 s_num = st.text_input('URL')
 submit = st.button("Search")
 if submit:
-    options = ChromeOptions()
+    options = webdriver.ChromeOptions()
     # option設定を追加（設定する理由はメモリの削減）
     options.add_argument("--headless")
     options.add_argument('--disable-gpu')
@@ -16,9 +17,11 @@ if submit:
     options.add_argument('--disable-dev-shm-usage')
 
     CHROMEDRIVER = ChromeDriverManager().install()  # ChromeTypeを指定しない
+    service = ChromeService(CHROMEDRIVER)
     driver = webdriver.Chrome(
         executable_path=CHROMEDRIVER,
-        options=options
+        options=options,
+        service=service
     )
 
     # URLで指定したwebページを開く
